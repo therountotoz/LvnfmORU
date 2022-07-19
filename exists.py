@@ -3,8 +3,6 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-
-engine = create_engine("sqlite:///:memory:", echo=True)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
@@ -14,7 +12,6 @@ class Toaster(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    color = Column(String)
 
 
 def toaster_exists_bad(toaster_id):
@@ -32,7 +29,6 @@ def main():
     Base.metadata.create_all(engine)
 
     toaster_exists_bad(1)
-    toaster_exists_good(2)
 
 
 if __name__ == "__main__":
